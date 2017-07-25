@@ -1,5 +1,5 @@
-const Worker = require('../classes/Worker');
 const squel = require('squel').useFlavour('postgres');
+const Worker = require('./classes/Worker');
 const db = require('../database/client');
 
 /**
@@ -17,7 +17,8 @@ function getRandomInt(min, max) {
 /**
  * Return a promise that will pause for a random amount of time, to simulate work being done.
  */
-const pause = () => new Promise(resolve => setTimeout(() => resolve(), getRandomInt(1000, 10000)));
+// const pause = () => new Promise(resolve => setTimeout(() => resolve(), getRandomInt(1000, 10000)));
+const pause = () => new Promise(resolve => setTimeout(() => resolve(), 60000));
 
 //Extend the Worker class.
 class MyWorker extends Worker {

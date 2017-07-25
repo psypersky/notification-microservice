@@ -21,9 +21,10 @@
     "supertest": "^3.0.0"
   },
   "scripts": {
-    "start": "nodemon ./src/server",
+    "start": "nodemon ./src/api",
     "test": "npm run clear-test-data && LOG_LEVEL=error mocha",
-    "clear-test-data": "sh ./src/database/clear-test-data.sh"
+    "clear-test-data": "sh ./src/database/clear-test-data.sh",
+    "start-engine": "nodemon ./src/engine/NotificationController"
   },
   "repository": {
     "type": "git",
