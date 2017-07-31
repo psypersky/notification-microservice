@@ -1,6 +1,6 @@
 const squel = require('squel').useFlavour('postgres');
 const Worker = require('./classes/Worker');
-const db = require('../database/client');
+const { db } = require('../database/client');
 
 /**
  * Get a random integer.  Used to pause a random amount of time.

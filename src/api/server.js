@@ -75,4 +75,5 @@ app.use(async function onValidationError(ctx, next) {
 });
 
 app.use(router.middleware());
+
 module.exports = app;

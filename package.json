@@ -10,6 +10,7 @@
     "koa-better-router": "^2.1.1",
     "koa-convert": "^1.2.0",
     "koa-joi-bouncer": "^2.0.8",
+    "lodash": "^4.17.4",
     "node-fetch": "^1.7.1",
     "pg-promise": "^6.3.5",
     "squel": "^5.11.1",
@@ -21,10 +22,7 @@
     "supertest": "^3.0.0"
   },
   "scripts": {
-    "start": "nodemon ./src/api",
-    "test": "npm run clear-test-data && LOG_LEVEL=error mocha",
-    "clear-test-data": "sh ./src/database/clear-test-data.sh",
-    "start-engine": "nodemon ./src/engine/NotificationController"
+    "test": "sh ./src/database/recreate-db.sh notifications-test notificator && LOG_LEVEL=error mocha ./test/test"
   },
   "repository": {
     "type": "git",

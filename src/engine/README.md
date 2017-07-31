@@ -2,6 +2,12 @@
 
 ## How it works?
 
+
+
+
+
+
+
 It is made of two main parts, the controller and the workers, in general the controller is the one that distribute the tasks and the workers do the actual task.
 
 controller.constructor - get how many workers it will spawn and the script of the worker to use

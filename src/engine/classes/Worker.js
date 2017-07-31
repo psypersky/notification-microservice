@@ -8,6 +8,7 @@ class Worker {
 		process.on('message', async message => {
 			switch (message.command) {
 				case 'register':
+        console.log('transports', message.transports);
 					this.whoAmI = message.whoAmI;
 					process.send({ command: 'register', whoAmI: this.whoAmI });
 					break;

@@ -6,7 +6,8 @@ const DEADLOCK_THROTTLE = 1800000; // 30 minutes default
 const CHECK_THROTTLE = 1000;
 
 module.exports = class Controller {
-  constructor({ maxWorkers = NUM_CPU, script }) {
+  constructor({ transports = transports, maxWorkers = NUM_CPU, script }) {
+    this.transports = transports;
     this.workers = {};
     this.maxWorkers = maxWorkers;
     this.script = script;
@@ -37,7 +38,7 @@ module.exports = class Controller {
     workerProcess.crashed = false; // Track if responds to pings
 
     // Let the worker know which ID it is.
-    workerProcess.send({ command: 'register', whoAmI: id });
+    workerProcess.send({ command: 'register', whoAmI: id, transports: this.transports });
 
     logger.info('[Controller]', `Worker ${id} created`);
 

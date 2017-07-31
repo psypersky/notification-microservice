@@ -1,13 +1,48 @@
 const request = require('supertest');
 const expect = require('chai').expect;
-const app = require('../src/server');
+const { API } = require('../src');
 
+let api;
 let server;
+const apiConfig = {
+  port: 8080,
+  dbConnection: {
+    database: "notifications-test",
+  },
+};
 
-describe('Server', () => {
+
+// ==> Feature testing
+// Boot API
+// Ping API
+// Create an user
+// Register user token
+// Unregister user token
+
+// Create a template
+// Delete template
+
+// Create a notification
+// Delete a notification
+
+// ==> Functionality testing
+// Boot api
+// Boot engine
+
+// Create two users
+// Register user tokens
+// Create two templates
+// Create four notification each one for each user
+
+// Wait until engine has a count of sent notifications of four
+
+
+describe('API', () => {
   describe('Start', function() {
     it('should intialize server', async () => {
-      server = app.listen();
+      const api = new API(apiConfig);
+      api.start(() => console.log(`notifications-microservice listening on ${apiConfig.port}`));
+      server = api.server;
     });
   });
 
@@ -35,8 +70,10 @@ describe('Server', () => {
 
         expect(res.body.data.external_id).to.equal('test-user-001');
     });
+  });
 
-    it('should not create user with same id', async() => {
+  describe('Template', () => {
+    it('should create a template successfully', async() => {
       const res = await request(server)
         .post('/api/user')
         .send({
@@ -47,21 +84,9 @@ describe('Server', () => {
           groups: ['test-group-1', 'test-group-2'],
         })
         .set('Accept', 'application/json')
-        .expect(400);
+        .expect(200);
 
-        expect(res.body.data.external_id).to.be.a('string');
+        expect(res.body.data.external_id).to.equal('test-user-001');
     });
-
-    it('should validate required fields', async() => {
-      const res = await request(server)
-        .post('/api/user')
-        .send({})
-        .set('Accept', 'application/json')
-        .expect(400);
-
-        expect(res.body.data.external_id).to.be.a('string');
-        expect(res.body.data.name).to.be.a('string');
-    });
-
   });
 });

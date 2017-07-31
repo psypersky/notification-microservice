@@ -1,18 +1,15 @@
-const db = require('../../database/client')
+const { db } = require('../../database');
 
 module.exports = async function deleteTemplate(ctx) {
-  const id = ctx.params.id
+  const id = ctx.params.id;
 
-  const template = await db.oneOrNone(
-    'DELETE FROM template where id = $1 returning id',
-    [id]
-  )
+  const template = await db().oneOrNone('DELETE FROM template where id = $1 returning id', [id]);
 
   if (!template) {
-    ctx.response.status = 404
+    ctx.response.status = 404;
     ctx.fail({ id: `template with id ${id} not found` });
-    return
+    return;
   }
 
-  ctx.success(template)
-}
+  ctx.success(template);
+};

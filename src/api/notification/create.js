@@ -1,6 +1,5 @@
 const winston = require('winston');
 const squel = require('squel').useFlavour('postgres');
-const db = require('../../database/client');
 const queries = require('./queries');
 
 /**

@@ -1,7 +1,7 @@
 const winston = require('winston');
 const squel = require('squel').useFlavour('postgres');
 const utils = require('../utils');
-const db = require('../../database/client');
+const { db } = require('../../database');
 
 module.exports = async function createTemplate(ctx) {
   const { name, email, sms, voice, web, push } = ctx.request.body;
@@ -28,7 +28,7 @@ module.exports = async function createTemplate(ctx) {
     baseQuery.set('timezone', push);
   }
 
-  const template = await db.one(baseQuery.toString());
+  const template = await db().one(baseQuery.toString());
 
   winston.info('[CreateTemplate] created', template);
   ctx.success(template);

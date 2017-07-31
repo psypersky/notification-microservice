@@ -1,6 +1,5 @@
 const winston = require('winston');
 const queries = require('./queries');
-const db = require('../../database/client');
 
 module.exports = async function updateNotification(ctx) {
   const id = ctx.params.id;
